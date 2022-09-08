@@ -1,4 +1,4 @@
-name: "Pull Request"
+cname: "Pull Request"
 
 on:
   pull_request:
@@ -22,7 +22,7 @@ jobs:
           role-to-assume: ${{ secrets.READ_ROLE }}
           role-session-name: OIDCSession
 
-      - run: aws s3 cp s3://elias-brange-github-oidc-dev-env-bucket/README.md README.md
+      - run: aws s3 cp s3://kevin-brange-github-oidc-dev-env-bucket/tmp.txt tmp.txt.kevin
         shell: bash
 
   write-dev:
@@ -40,7 +40,7 @@ jobs:
           role-to-assume: ${{ secrets.DEV_DEPLOY_ROLE }}
           role-session-name: OIDCSession
 
-      - run: aws s3 cp README.md s3://elias-brange-github-oidc-dev-env-bucket/README.md
+      - run: aws s3 cp README.md s3://kevin-brange-github-oidc-dev-env-bucket/README.md
         shell: bash
 
   read-prod:
@@ -56,5 +56,5 @@ jobs:
           role-to-assume: ${{ secrets.READ_ROLE }}
           role-session-name: OIDCSession
 
-      - run: aws s3 cp s3://elias-brange-github-oidc-prod-env-bucket/README.md README.md
+      - run: aws s3 cp s3://kevin-brange-github-oidc-prod-env-bucket/README.md README.md
         shell: bash
