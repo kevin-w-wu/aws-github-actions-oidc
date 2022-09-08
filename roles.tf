@@ -3,8 +3,8 @@ module "read_role" {
 
   name = "gh-oidc-read-role"
   subject_claims = [
-    "repo:eliasbrange/aws-github-actions-oidc:pull_request",
-    "repo:eliasbrange/aws-github-actions-oidc:ref:refs/heads/main"
+    "repo:kevin-w-wu/aws-github-actions-oidc:pull_request",
+    "repo:kevin-w-wu/aws-github-actions-oidc:ref:refs/heads/main"
   ]
   oidc_provider_arn = data.aws_iam_openid_connect_provider.github.arn
   policy = jsonencode({
@@ -39,7 +39,7 @@ module "dev_deploy_role" {
 
   name = "gh-oidc-dev-deploy-role"
   subject_claims = [
-    "repo:eliasbrange/aws-github-actions-oidc:environment:Development"
+    "repo:kevin-w-wu/aws-github-actions-oidc:environment:Development"
   ]
   oidc_provider_arn = data.aws_iam_openid_connect_provider.github.arn
   policy = jsonencode({
@@ -73,7 +73,7 @@ module "prod_deploy_role" {
 
   name = "gh-oidc-prod-deploy-role"
   subject_claims = [
-    "repo:eliasbrange/aws-github-actions-oidc:environment:Production"
+    "repo:kevin-w-wu/aws-github-actions-oidc:environment:Production"
   ]
   oidc_provider_arn = data.aws_iam_openid_connect_provider.github.arn
   policy = jsonencode({

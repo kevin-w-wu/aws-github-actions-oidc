@@ -1,9 +1,9 @@
 terraform {
-  backend "s3" {
-    bucket = "elias-brange-sandbox"
-    key    = "terraform/aws-github-actions-oidc.tfstate"
-    region = "eu-west-1"
-  }
+  #backend "s3" {
+  #  bucket = "kevin-brange-sandbox"
+  #  key    = "terraform/aws-github-actions-oidc.tfstate"
+  #  region = "cn-northwest-1"
+  #}
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -13,5 +13,5 @@ terraform {
 }
 
 provider "aws" {
-  region = "eu-west-1"
+  region = "cn-northwest-1"
 }
