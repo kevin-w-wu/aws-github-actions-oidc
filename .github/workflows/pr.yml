@@ -1,7 +1,15 @@
-cname: "Pull Request"
+# cname: "Pull Request"
 
+# on:
+#   pull_request:
+#     branches:
+#       - main
+
+name: 'Push'
+ 
+# The workflow should only trigger on push events to the main branch
 on:
-  pull_request:
+  push:
     branches:
       - main
 
