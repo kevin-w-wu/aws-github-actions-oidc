@@ -28,7 +28,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@master
         with:
           aws-region: cn-northwest-1
-          #comment , use read role
+          #comment , use read role, no cn
           role-to-assume: ${{ secrets.READ_ROLE }}
           role-session-name: OIDCSession
 
