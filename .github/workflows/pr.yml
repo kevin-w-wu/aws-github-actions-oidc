@@ -1,70 +1,70 @@
-# cname: "Pull Request"
+# # cname: "Pull Request"
 
+# # on:
+# #   pull_request:
+# #     branches:
+# #       - main
+
+# name: 'Push'
+
+# # The workflow should only trigger on push events to the main branch
 # on:
-#   pull_request:
+#   push:
 #     branches:
 #       - main
 
-name: 'Push'
- 
-# The workflow should only trigger on push events to the main branch
-on:
-  push:
-    branches:
-      - main
+# permissions:
+#   id-token: write
+#   contents: read
 
-permissions:
-  id-token: write
-  contents: read
+# jobs:
+#   read-dev:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v3
 
-jobs:
-  read-dev:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+#       - name: Configure AWS Credentials
+#         uses: aws-actions/configure-aws-credentials@master
+#         with:
+#           aws-region: cn-northwest-1
+#           #comment , use read role, no cn
+#           role-to-assume: ${{ secrets.READ_ROLE }}
+#           role-session-name: OIDCSession
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@master
-        with:
-          aws-region: cn-northwest-1
-          #comment , use read role, no cn
-          role-to-assume: ${{ secrets.READ_ROLE }}
-          role-session-name: OIDCSession
+#       - run: aws s3 cp s3://kevin-brange-github-oidc-dev-env-bucket/tmp.txt tmp.txt.kevin
+#         shell: bash
 
-      - run: aws s3 cp s3://kevin-brange-github-oidc-dev-env-bucket/tmp.txt tmp.txt.kevin
-        shell: bash
+#   write-dev:
+#     runs-on: ubuntu-latest
+#     needs: read-dev
+#     environment: Development
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v3
 
-  write-dev:
-    runs-on: ubuntu-latest
-    needs: read-dev
-    environment: Development
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+#       - name: Configure AWS Credentials
+#         uses: aws-actions/configure-aws-credentials@v1
+#         with:
+#           aws-region: cn-northwest-1
+#           role-to-assume: ${{ secrets.DEV_DEPLOY_ROLE }}
+#           role-session-name: OIDCSession
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-region: cn-northwest-1
-          role-to-assume: ${{ secrets.DEV_DEPLOY_ROLE }}
-          role-session-name: OIDCSession
+#       - run: aws s3 cp README.md s3://kevin-brange-github-oidc-dev-env-bucket/README.md
+#         shell: bash
 
-      - run: aws s3 cp README.md s3://kevin-brange-github-oidc-dev-env-bucket/README.md
-        shell: bash
+#   read-prod:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v3
 
-  read-prod:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+#       - name: Configure AWS Credentials
+#         uses: aws-actions/configure-aws-credentials@v1
+#         with:
+#           aws-region: cn-northwest-1
+#           role-to-assume: ${{ secrets.READ_ROLE }}
+#           role-session-name: OIDCSession
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-region: cn-northwest-1
-          role-to-assume: ${{ secrets.READ_ROLE }}
-          role-session-name: OIDCSession
-
-      - run: aws s3 cp s3://kevin-brange-github-oidc-prod-env-bucket/README.md README.md
-        shell: bash
+#       - run: aws s3 cp s3://kevin-brange-github-oidc-prod-env-bucket/README.md README.md
+#         shell: bash
