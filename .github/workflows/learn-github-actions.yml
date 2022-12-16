@@ -10,5 +10,7 @@ jobs:
       #   with:
       #     node-version: "14"
       # - run: npm install -g bats
+      - run: cat file_not_exists || true
+      - run: cat file_not_exists
       - run: bats -v
       - run: echo 'supposed not seeing this since previous step will exit'
